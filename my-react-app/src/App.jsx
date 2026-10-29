@@ -1,9 +1,8 @@
-import { useState } from "react";
-import UsersList from "./components/UserList/UserList";
+import UsersDirectory from "./components/UsersDirectory/UsersDirectory";
 import "./App.css";
 
 function App() {
-  return <UsersList></UsersList>;
+  return <UsersDirectory></UsersDirectory>;
 }
 
 export default App;

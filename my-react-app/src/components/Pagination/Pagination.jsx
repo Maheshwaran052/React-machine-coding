@@ -21,7 +21,7 @@ function Pagination({ page, totalPages, onPageChange }) {
             onClick={() => onPageChange(pageNumber)}
             disabled={page === pageNumber}
           >
-            PageNumber
+            {pageNumber}
           </button>
         ),
       )}
