@@ -1,11 +1,15 @@
 import { useState } from "react";
-
-import "./App.css";
+import { ThemeContext } from "./components/ThemeSwitcherEx/ThemeContext";
+import Toolbar from "./components/ThemeSwitcherEx/Toolbar";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [theme, setTheme] = useState("light");
 
-  return {};
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
 }
 
 export default App;
