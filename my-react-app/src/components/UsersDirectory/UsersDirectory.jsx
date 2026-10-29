@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import Pagination from "../Pagination/Pagination";
+import SearchBar from "../SearchBar/SearchBar";
+import UsersList from "../UserList/UserList";
 
 const API_URL = "https://jsonplaceholder.typicode.com/users";
 
@@ -69,24 +72,17 @@ function UsersDirectory() {
 
   const currentItems = filteredUsers.slice(startIndex, startIndex + pageSize);
 
-  function prev() {
-    setPage((p) => Math.max(1, p - 1));
+  function onSearchChange(newValue) {
+    setSearchTerm(newValue);
   }
 
-  function next() {
-    setPage((p) => Math.min(totalPages, p + 1));
+  function onPageChange(newValue) {
+    setPage(newValue);
   }
 
   return (
     <div>
-      <h2>Search Users</h2>
-
-      <input
-        type="text"
-        placeholder="Search by name"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <SearchBar searchTerm={searchTerm} onSearchChange={onSearchChange} />
 
       {loading ? (
         <p>Loading users...</p>
@@ -96,33 +92,13 @@ function UsersDirectory() {
         <p>No users found.</p>
       ) : (
         <>
-          {currentItems.map((user) => (
-            <p key={user.id}>{user.name}</p>
-          ))}
+          <UsersList currentUsers={currentItems} />
 
-          <p>
-            Page {page} of {totalPages}
-          </p>
-
-          <button onClick={prev} disabled={page === 1}>
-            Previous
-          </button>
-
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (pageNumber) => (
-              <button
-                key={pageNumber}
-                onClick={() => setPage(pageNumber)}
-                disabled={page === pageNumber}
-              >
-                {pageNumber}
-              </button>
-            ),
-          )}
-
-          <button onClick={next} disabled={page === totalPages}>
-            Next
-          </button>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
         </>
       )}
     </div>
