@@ -1,4 +1,6 @@
-function ProductList({ products, onAddToCart }) {
+import Button from "../../reusableComponents/Button";
+
+function ProductList({ products, onAddToCart, loading }) {
   return (
     <div>
       {products.map((product) => (
@@ -8,7 +10,12 @@ function ProductList({ products, onAddToCart }) {
             <span>{product.price}</span>
           </p>
 
-          <button onClick={() => onAddToCart(product)}>Add to Cart</button>
+          <Button
+            label={loading ? "Adding" : "Add to Cart"}
+            variant="primary"
+            disabled={loading}
+            onClick={() => onAddToCart(product)}
+          />
         </div>
       ))}
     </div>
