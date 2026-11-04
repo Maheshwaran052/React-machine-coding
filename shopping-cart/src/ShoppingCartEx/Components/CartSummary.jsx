@@ -1,9 +1,11 @@
 import Button from "../../reusableComponents/Button";
-function CartSummary({ cart, OnDelete }) {
+import { memo } from "react";
+function CartSummary({ cart, onDelete }) {
   const totalPrice = cart.reduce((total, product) => total + product.price, 0);
 
   return (
     <div>
+      {console.log("CartSummary rendered")}
       <p>You have added {cart.length} items</p>
       <p>Total Price: ₹{totalPrice.toLocaleString("en-IN")}</p>
       {cart.map((product) => (
@@ -12,7 +14,7 @@ function CartSummary({ cart, OnDelete }) {
           <Button
             label="Delete"
             variant="delete"
-            onClick={() => OnDelete(product)}
+            onClick={() => onDelete(product)}
           ></Button>
         </div>
       ))}
@@ -21,4 +23,4 @@ function CartSummary({ cart, OnDelete }) {
   );
 }
 
-export default CartSummary;
+export default memo(CartSummary);

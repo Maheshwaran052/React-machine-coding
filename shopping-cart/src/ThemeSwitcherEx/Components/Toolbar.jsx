@@ -1,4 +1,4 @@
-import ThemeButton from "./ThemeButton";
+import ThemeButton from "../ThemeButton";
 function Toolbar() {
   return <ThemeButton />;
 }

@@ -1,21 +1,32 @@
 import CartSummary from "./CartSummary";
 import ProductList from "./ProductList";
+import SearchBar from "../SearchBar";
 import Modal from "../../reusableComponents/Modal";
-import { useState } from "react";
+import { useCallback, useState, createContext, useMemo } from "react";
+import ShoppingContext from "../ShoppingContext";
+
+const products = [
+  { id: 1, name: "Asus ROG", price: 150000 },
+  { id: 2, name: "Asus Tuf Gaming", price: 80000 },
+  { id: 3, name: "Acer", price: 60000 },
+];
 
 function ShoppingPage() {
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingProductId, setLoadingProductId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleAddToCart = (product) => {
-    setLoading(true);
+  const handleAddToCart = useCallback((product) => {
+    setLoadingProductId(product.id);
+
     setCart((previousCart) => [...previousCart, product]);
+
     setTimeout(() => {
-      setLoading(false);
+      setLoadingProductId(null);
     }, 500);
-  };
+  }, []);
   const handleDelete = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -31,17 +42,25 @@ function ShoppingPage() {
     setIsModalOpen(false);
     setSelectedProduct(null);
   };
-  const products = [
-    { id: 1, name: "Asus ROG", price: 150000 },
-    { id: 2, name: "Asus Tuf Gaming", price: 80000 },
-    { id: 3, name: "Acer", price: 60000 },
-  ];
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  }, [products, searchTerm]);
+
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) => a.price - b.price);
+  }, [filteredProducts]);
   return (
     <div>
+      <ShoppingContext.Provider value={{ searchTerm, setSearchTerm }}>
+        <SearchBar />
+      </ShoppingContext.Provider>
       <ProductList
-        products={products}
+        products={sortedProducts}
         onAddToCart={handleAddToCart}
-        loading={loading}
+        loadingProductId={loadingProductId}
       />
       <CartSummary cart={cart} onDelete={handleDelete} />
       <Modal
