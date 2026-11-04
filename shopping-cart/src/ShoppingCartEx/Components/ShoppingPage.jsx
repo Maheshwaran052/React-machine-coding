@@ -2,7 +2,7 @@ import CartSummary from "./CartSummary";
 import ProductList from "./ProductList";
 import SearchBar from "../SearchBar";
 import Modal from "../../reusableComponents/Modal";
-import { useCallback, useState, createContext, useMemo } from "react";
+import { useCallback, useState, useMemo } from "react";
 import ShoppingContext from "../ShoppingContext";
 
 const products = [
