@@ -111,7 +111,7 @@ function RegistrationForm() {
             const newValue = e.target.value;
             setFirstName(newValue);
 
-            if (errors.firstName) {
+            if (newValue.trim() || errors.firstName) {
               const fNameError = validateFirstName(newValue);
               setErrors((previousErrors) => {
                 const updatedErrors = { ...previousErrors };
@@ -149,7 +149,7 @@ function RegistrationForm() {
             const newValue = e.target.value;
             setLastName(newValue);
 
-            if (errors.lastName) {
+            if (newValue.trim() || errors.lastName) {
               const lNameError = validateLastName(newValue);
               setErrors((previousErrors) => {
                 const updatedErrors = { ...previousErrors };
@@ -174,7 +174,7 @@ function RegistrationForm() {
             const newValue = e.target.value;
 
             setEmail(newValue);
-            if (errors.email) {
+            if (newValue.trim() || errors.email) {
               const emailError = validateEmail(newValue);
               setErrors((previousErrors) => {
                 const updatedErrors = { ...previousErrors };
@@ -223,7 +223,7 @@ function RegistrationForm() {
           onChange={(e) => {
             const newValue = e.target.value;
             setPassword(newValue);
-            if (errors.password) {
+            if (newValue.trim() || errors.password) {
               const passError = validatePassword(newValue);
               setErrors((previousErrors) => {
                 const updatedErrors = { ...previousErrors };
@@ -278,7 +278,7 @@ function RegistrationForm() {
           onChange={(e) => {
             const newValue = e.target.value;
             setConfirmPassword(newValue);
-            if (confirmPassword.trim() || errors.confirmPassword) {
+            if (newValue.trim() || errors.confirmPassword) {
               const confirmPassError = validateConfirmPassword(
                 password,
                 newValue,
