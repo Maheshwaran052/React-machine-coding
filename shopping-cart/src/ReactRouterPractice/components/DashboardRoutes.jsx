@@ -1,6 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import DashboardLayout from "./DashboardLayout";
+import DashboardHome from "./DashboardHome";
+import Profile from "./Profile";
+import Reports from "./Reports";
 function DashboardRoutes() {
-  <BrowserRouter>
+  return (
     <Routes>
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardHome />} />
@@ -8,5 +12,6 @@ function DashboardRoutes() {
         <Route path="reports" element={<Reports />} />
       </Route>
     </Routes>
-  </BrowserRouter>;
+  );
 }
+export default DashboardRoutes;
