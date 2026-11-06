@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ThemeContext } from "./components/ThemeSwitcherEx/ThemeContext";
-import Toolbar from "./components/ThemeSwitcherEx/Toolbar";
-import ShoppingPage from "./components/ShoppingCartEx/ShoppingPage";
+import { ThemeContext } from "./ThemeSwitcherEx/Components/ThemeContext";
+import Toolbar from "./ThemeSwitcherEx/Components/Toolbar";
+import ShoppingPage from "./ShoppingCartEx/Components/ShoppingPage";
+import Pages from "./ReactRouterPractice/components/Pages";
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -9,7 +10,8 @@ function App() {
     // <ThemeContext.Provider value={{ theme, setTheme }}>
     //   <Toolbar />
     // </ThemeContext.Provider>
-    <ShoppingPage></ShoppingPage>
+    // <ShoppingPage></ShoppingPage>
+    <Pages></Pages>
   );
 }
 

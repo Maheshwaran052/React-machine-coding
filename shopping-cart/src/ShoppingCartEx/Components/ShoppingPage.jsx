@@ -1,9 +1,9 @@
 import CartSummary from "./CartSummary";
 import ProductList from "./ProductList";
-import SearchBar from "../SearchBar";
+import SearchBar from "./SearchBar";
 import Modal from "../../reusableComponents/Modal";
 import { useCallback, useState, useMemo } from "react";
-import ShoppingContext from "../ShoppingContext";
+import ShoppingContext from "./ShoppingContext";
 
 const products = [
   { id: 1, name: "Asus ROG", price: 150000 },
