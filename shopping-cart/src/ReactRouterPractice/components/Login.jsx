@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./AuthContext";
 
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+const { login } = useContext(AuthContext);
   function validateForm() {
     const validateErrors = {};
     if (!userName.trim()) {
@@ -42,8 +45,9 @@ function Login() {
     if (Object.keys(validateErrors).length > 0) {
       setErrors(validateErrors);
     } else {
-      setErrors({});
-      navigate("/users");
+     setErrors({});
+     login();
+     navigate("/dashboard");
     }
   };
   return (
